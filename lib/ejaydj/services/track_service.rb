@@ -8,7 +8,7 @@ module Ejaydj
       end
 
       def all
-        response_items = @music_client.playlist_tracks(@user_id, @playlist_id)
+        response_items = @music_client.playlist_tracks(user_id: @user_id, playlist_id: @playlist_id)
 
         response_items.map do |track|
           Track.new(

@@ -2,6 +2,8 @@ require 'rest_client'
 require 'base64'
 require 'json'
 
+require 'pry'
+
 module Ejaydj
 	module Spotify
 		class Client
@@ -10,20 +12,18 @@ module Ejaydj
 			ACCOUNT_API_URL		= 'https://accounts.spotify.com'
 
 			def initialize(config={})
-        config.merge!(default_config)
-
-        @rest_client   = config[:rest_client]
+        @rest_client   = config[:rest_client] || RestClient
         @client_id 		 = config[:client_id]
         @client_secret = config[:client_secret]
       end
 
-      def user_playlists(user_id)
+      def user_playlists(user_id: nil)
         url = "#{API_URL}/v1/users/#{user_id}/playlists?limit=50"
         response = get_request(url)
         fetch_items(response)
       end
 
-      def playlist_tracks(user_id, playlist_id)
+      def playlist_tracks(user_id: nil, playlist_id: nil)
         url = "#{API_URL}/v1/users/#{user_id}/playlists/#{playlist_id}/tracks"
         response = get_request(url)
         fetch_items(response)
@@ -61,10 +61,6 @@ module Ejaydj
         response = @rest_client.post("#{ACCOUNT_API_URL}/api/token", payload, headers)
 
         return JSON.parse(response)["access_token"]
-      end
-
-      def default_config
-        { rest_client: RestClient }
       end
 
     end
