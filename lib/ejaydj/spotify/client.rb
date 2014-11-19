@@ -22,6 +22,11 @@ module Ejaydj
         get_request(url)
       end
 
+      def playlist_tracks(user_id, playlist_id)
+        url = "#{API_URL}/v1/users/#{user_id}/playlists/#{playlist_id}/tracks"
+        get_request(url)
+      end
+
       private
 
       def get_request(url)

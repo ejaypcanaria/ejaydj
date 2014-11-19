@@ -1,5 +1,4 @@
-require 'ejaydj/parsers/spotify'
-require 'ejaydj/services/playlist'
+require 'ejaydj/services/playlist_service'
 require 'ejaydj/spotify/client'
 
 module Ejaydj
@@ -7,34 +6,30 @@ module Ejaydj
     attr_accessor :music_client_id,
                   :music_client_secret,
                   :music_user_id,
-                  :music_client,
-                  :music_parser
+                  :music_client
 
     def initialize(attributes={})
-      attributes.merge!(default_attributes)
       instantiate_variables_from attributes
+      yield self if block_given?
     end
 
     def playlists
-      @playlists ||= playlist_service.all_from(music_user_id)
+      @playlists ||= all_playlists
     end
 
-    def reload
-      @playlists = playlist_service.all_from(music_user_id)
+    def reload!
+      @playlists = all_playlists
+      @playlists.each {|playlist| playlist.reload! }
     end
 
     private
 
-    def playlist_service
-      @playlist_service ||= Services::Playlist.new(
-                                        client: music_client,
-                                        parser: music_parser)
+    def all_playlists
+      playlist_service.all_from(@music_user_id)
     end
 
-    def default_attributes
-      {
-        music_parser: Parsers::Spotify
-      }
+    def playlist_service
+      @playlist_service ||= Services::PlaylistService.new(music_client: music_client)
     end
 
     def music_client
