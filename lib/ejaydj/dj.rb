@@ -29,13 +29,6 @@ module Ejaydj
       current_playlist(time).next_track
     end
 
-    def current_playlist(time)
-      playlist_name = scheduled_playlist(time.strftime('%k').to_i)
-      playlist = playlists.select do |playlist|
-        playlist.name == playlist_name
-      end.first
-    end
-
     def playlists
       @playlists ||= all_playlists
     end
@@ -46,6 +39,13 @@ module Ejaydj
     end
 
     private
+
+    def current_playlist(time)
+      playlist_name = scheduled_playlist(time.strftime('%k').to_i)
+      playlist = playlists.select do |playlist|
+        playlist.name == playlist_name
+      end.first
+    end
 
     def scheduled_playlist(time)
       scheduled_playlists = PLAYLIST_SCHEDULE.select do |schedule, value|
