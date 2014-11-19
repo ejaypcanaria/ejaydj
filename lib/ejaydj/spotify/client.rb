@@ -18,8 +18,20 @@ module Ejaydj
       end
 
       def user_playlists(user_id)
-        url = "#{API_URL}/v1/users/#{user_id}/playlists"
-        get_request(url)
+        url = "#{API_URL}/v1/users/#{user_id}/playlists?limit=50"
+        response = get_request(url)
+
+        response_items = response["items"]
+        next_url = response["next"]
+
+        while next_url do
+          response = get_request(next_url)
+          response_items += response["items"]
+
+          next_url = response["next"]
+        end
+
+        response_items
       end
 
       def playlist_tracks(user_id, playlist_id)
