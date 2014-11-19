@@ -18,6 +18,11 @@ module Ejaydj
       @music_client     = attributes[:music_client]
     end
 
+    def next_track
+      reload! if tracks.empty?
+      tracks.pop
+    end
+
     def tracks
       @tracks ||= all_tracks
     end
@@ -28,7 +33,7 @@ module Ejaydj
 
     private
     def all_tracks
-      track_service.all_from(user_id: @user_id, playlist_id: @id)
+      track_service.all_from(user_id: @user_id, playlist_id: @id).shuffle
     end
 
     def track_service
