@@ -32,12 +32,16 @@ module Ejaydj
     end
 
     private
+
     def all_tracks
-      track_service.all_from(user_id: @user_id, playlist_id: @id).shuffle
+      track_service.all.shuffle
     end
 
     def track_service
-      @track_service ||= Services::TrackService.new(music_client: @music_client)
+      @track_service ||= Services::TrackService.new(
+                                          music_client: @music_client,
+                                          user_id: @user_id,
+                                          playlist_id: @id)
     end
   end
 end
