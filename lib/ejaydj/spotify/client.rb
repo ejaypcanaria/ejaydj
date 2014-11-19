@@ -20,7 +20,18 @@ module Ejaydj
       def user_playlists(user_id)
         url = "#{API_URL}/v1/users/#{user_id}/playlists?limit=50"
         response = get_request(url)
+        fetch_items(response)
+      end
 
+      def playlist_tracks(user_id, playlist_id)
+        url = "#{API_URL}/v1/users/#{user_id}/playlists/#{playlist_id}/tracks"
+        response = get_request(url)
+        fetch_items(response)
+      end
+
+      private
+
+      def fetch_items(response)
         response_items = response["items"]
         next_url = response["next"]
 
@@ -33,13 +44,6 @@ module Ejaydj
 
         response_items
       end
-
-      def playlist_tracks(user_id, playlist_id)
-        url = "#{API_URL}/v1/users/#{user_id}/playlists/#{playlist_id}/tracks"
-        get_request(url)
-      end
-
-      private
 
       def get_request(url)
         JSON.parse(@rest_client.get(url, headers))

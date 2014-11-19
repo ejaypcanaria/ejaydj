@@ -8,14 +8,15 @@ module Ejaydj
       end
 
       def all
-        response_json = @music_client.playlist_tracks(@user_id, @playlist_id)
+        response_items = @music_client.playlist_tracks(@user_id, @playlist_id)
 
-        response_json["items"].map do |track|
+        response_items.map do |track|
           Track.new(
-            id:     track["track"]["id"],
-            name:   track["track"]["name"],
-            album:  track["track"]["album"]["name"],
-            artist: track["track"]["artists"][0]["name"]
+            id:            track["track"]["id"],
+            name:          track["track"]["name"],
+            album:         track["track"]["album"]["name"],
+            artist:        track["track"]["artists"][0]["name"],
+            playlist_id:   @playlist_id
           )
         end
       end
