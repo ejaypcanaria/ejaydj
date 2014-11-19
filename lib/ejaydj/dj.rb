@@ -7,7 +7,7 @@ module Ejaydj
       6..11   => :morning_playlists,      # 6AM  - 12PM
       12..17  => :noon_playlists,         # 12PM - 6PM
       18..22  => :night_playlists,        # 6PM  - 11PM
-      23..5   => :latenight_playlists     # 11PM - 6AM
+      23..5   => :late_night_playlists     # 11PM - 6AM
     }
 
     attr_accessor :music_client_id,
@@ -17,7 +17,7 @@ module Ejaydj
                   :morning_playlists,
                   :noon_playlists,
                   :night_playlists,
-                  :latenight_playlists
+                  :late_night_playlists
 
 
     def initialize(attributes={})
