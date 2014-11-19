@@ -20,7 +20,9 @@ module Ejaydj
 
     def next_track
       reload! if tracks.empty?
-      tracks.pop
+      track = tracks.pop
+      track.playlist_name = name
+      track
     end
 
     def tracks

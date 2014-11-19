@@ -8,9 +8,9 @@ RSpec.describe Ejaydj::Dj do
       config.music_client_id      = 'client_1'
       config.music_client_secret  = 'client_secret_1'
       config.music_client         = music_client
-      config.morning_playlists    = ["Morning Playlist"],
-      config.noon_playlists       = ["Noon Playlist"],
-      config.night_playlists      = ["Night Playlist"],
+      config.morning_playlists    = ["Morning Playlist"]
+      config.noon_playlists       = ["Noon Playlist"]
+      config.night_playlists      = ["Night Playlist"]
       config.late_night_playlists = ["Late Night Playlist"]
     end
   end
@@ -26,7 +26,7 @@ RSpec.describe Ejaydj::Dj do
 
   let(:track_items) do
     [
-      {"track" => {"id"            => 1,
+      {"track" => { "id"            => 1,
                     "name"          => "Track 1",
                     "album"         => {"name" => "Album 1"},
                     "artists"       => [{"name" => "Artist 1"}],
@@ -44,19 +44,31 @@ RSpec.describe Ejaydj::Dj do
 
   describe '#play_me_a_song' do
     context "when played in the morning" do
-      it "plays the song from the morning playlists"
+      it "plays the song from the morning playlists" do
+        song = dj.play_me_a_song(time: Time.new(2014, 11, 20, 6, 0, 0))
+        expect(dj.morning_playlists).to include(song.playlist_name)
+      end
     end
 
     context "when played in the noon" do
-      it "plays the song from the noon playlists"
+      it "plays the song from the noon playlists" do
+        song = dj.play_me_a_song(time: Time.new(2014, 11, 20, 17, 0, 0))
+        expect(dj.noon_playlists).to include(song.playlist_name)
+      end
     end
 
     context "when played in night" do
-      it "plays the song from the night playlists"
+      it "plays the song from the night playlists" do
+        song = dj.play_me_a_song(time: Time.new(2014, 11, 20, 18, 0, 0))
+        expect(dj.night_playlists).to include(song.playlist_name)
+      end
     end
 
     context "when played in late night" do
-      it "plays the song from the late night playlists"
+      it "plays the song from the late night playlists" do
+        song = dj.play_me_a_song(time: Time.new(2014, 11, 20, 23, 0, 0))
+        expect(dj.late_night_playlists).to include(song.playlist_name)
+      end
     end
   end
 
