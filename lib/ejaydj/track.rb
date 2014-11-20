@@ -1,11 +1,10 @@
 module Ejaydj
   class Track
-    attr_reader   :name,
+    attr_accessor :name,
                   :album,
                   :artist,
-                  :duration_ms
-
-    attr_accessor :playlist
+                  :duration_ms,
+                  :playlist
 
     def initialize(attributes={})
       @id            = attributes[:id]
