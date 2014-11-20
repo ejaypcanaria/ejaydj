@@ -45,14 +45,14 @@ RSpec.describe Ejaydj::Dj do
   describe '#play_me_a_song' do
     context "when played in the morning" do
       it "plays the song from the morning playlists" do
-        song = dj.play_me_a_song(time: Time.new(2014, 11, 20, 6, 0, 0))
+        song = dj.play_me_a_song(time: Time.new(2014, 11, 20, 6, 30, 0))
         expect(dj.morning_playlists).to include(song.playlist.name)
       end
     end
 
     context "when played in the noon" do
       it "plays the song from the noon playlists" do
-        song = dj.play_me_a_song(time: Time.new(2014, 11, 20, 17, 0, 0))
+        song = dj.play_me_a_song(time: Time.new(2014, 11, 20, 17, 45, 0))
         expect(dj.noon_playlists).to include(song.playlist.name)
       end
     end
@@ -66,7 +66,7 @@ RSpec.describe Ejaydj::Dj do
 
     context "when played in late night" do
       it "plays the song from the late night playlists" do
-        song = dj.play_me_a_song(time: Time.new(2014, 11, 20, 23, 0, 0))
+        song = dj.play_me_a_song(time: Time.new(2014, 11, 20, 23, 15, 0))
         expect(dj.late_night_playlists).to include(song.playlist.name)
       end
     end

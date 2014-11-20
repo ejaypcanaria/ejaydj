@@ -4,11 +4,11 @@ require 'ejaydj/spotify/client'
 module Ejaydj
   class Dj
     PLAYLIST_SCHEDULE = {
-      6..11   => :morning_playlists,      # 6AM  - 12PM
-      12..17  => :noon_playlists,         # 12PM - 6PM
-      18..22  => :night_playlists,        # 6PM  - 11PM
-      23..23  => :late_night_playlists,   # 11PM - 6AM
-      0..5    => :late_night_playlists
+      600..1159   => :morning_playlists,      # 6AM  - 12PM
+      1200..1759  => :noon_playlists,         # 12PM - 5:59PM
+      1800..2259  => :night_playlists,        # 6PM  - 10:59PM
+      2300..2359  => :late_night_playlists,   # 11PM - 11:59AM
+      0..559      => :late_night_playlists    # 12AM - 5:59AM
     }
 
     attr_accessor :music_client_id,
@@ -42,7 +42,7 @@ module Ejaydj
     private
 
     def current_playlist(time)
-      playlist_name = scheduled_playlist(time.strftime('%k').to_i)
+      playlist_name = scheduled_playlist(time.strftime('%k%M').to_i)
       playlist = playlists.select do |playlist|
         playlist.name == playlist_name
       end.first
