@@ -27,7 +27,7 @@ RSpec.describe Ejaydj::Djs::TwitterBot do
 
   let(:playlist_items) do
     [
-      {"name" => "Morning Playlist", "owner" => {"id" => 1}, "external_urls" => {"spotify" => "/playlist_morning"}, "tracks" => {"total" => 10}}
+      {"name" => "Morning Playlist", "owner" => {"id" => 1}, "external_urls" => {"spotify" => "http://spotify.com"}, "tracks" => {"total" => 10}}
     ]
   end
 
@@ -41,9 +41,12 @@ RSpec.describe Ejaydj::Djs::TwitterBot do
     ]
   end
 
+  let(:shorten_url) { 'http://goo.gl' }
+
   before do
     allow(music_client).to receive(:user_playlists).and_return(playlist_items)
     allow(music_client).to receive(:playlist_tracks).and_return(track_items)
+    allow(Googl).to receive(:shorten).and_return(double('GoogleURL', short_url: shorten_url))
   end
 
   describe '#tweet_me_a_song' do
@@ -51,7 +54,18 @@ RSpec.describe Ejaydj::Djs::TwitterBot do
       tweet = twitter_bot_dj.tweet_me_a_song(time: Time.new(2014, 11, 20, 7, 0, 0))
       song = tweet[:song]
 
-      expect(tweet[:message]).to eq("NP: #{song.name} by #{song.artist} from #{song.playlist.name} playlist: #{song.playlist.url}")
+      expect(tweet[:message]).to eq("NP: #{song.name} by #{song.artist} from playlist: #{shorten_url}")
+    end
+
+    context "when tweet string is over 140" do
+      it "shrinks the tweet less than 140 text" do
+        track_items.first["track"]["name"] = "This is a very long track name, yeah it is, yeah it is yeah it is...................................."
+
+        tweet = twitter_bot_dj.tweet_me_a_song(time: Time.new(2014, 11, 20, 7, 0, 0))
+        song = tweet[:song]
+
+        expect(tweet[:message].length).to be <= 140
+      end
     end
   end
 
