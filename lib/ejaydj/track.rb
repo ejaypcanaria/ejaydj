@@ -2,7 +2,8 @@ module Ejaydj
   class Track
     attr_reader   :name,
                   :album,
-                  :artist
+                  :artist,
+                  :duration_ms
 
     attr_accessor :playlist
 
@@ -12,6 +13,7 @@ module Ejaydj
       @album         = attributes[:album]
       @artist        = attributes[:artist]
       @playlist      = attributes[:playlist]
+      @duration_ms   = attributes[:duration_ms]
     end
   end
 end

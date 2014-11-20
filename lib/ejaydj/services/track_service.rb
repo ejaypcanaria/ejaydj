@@ -15,7 +15,8 @@ module Ejaydj
             id:            track["track"]["id"],
             name:          track["track"]["name"],
             album:         track["track"]["album"]["name"],
-            artist:        track["track"]["artists"][0]["name"]
+            artist:        track["track"]["artists"][0]["name"],
+            duration_ms:   track["track"]["duration_ms"]
           )
         end
       end
