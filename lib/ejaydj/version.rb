@@ -1,3 +1,3 @@
 module Ejaydj
-  VERSION = "0.0.1"
+  VERSION = "0.0.1.BETA"
 end

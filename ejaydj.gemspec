@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = Ejaydj::VERSION
   spec.authors       = ["Ejay Canaria"]
   spec.email         = ["ejaypcanaria@gmail.com"]
-  spec.summary       = %q{A DJ gem that generates songs and playlists based on your spotify account}
-  spec.description   = %q{A DJ gem that generates songs and playlists based on your spotify account}
+  spec.summary       = %q{A bot that tweets a song based on your spotify playlists}
+  spec.description   = %q{A bot that tweets a song based on your spotify playlists}
   spec.homepage      = ""
   spec.license       = "MIT"
 
