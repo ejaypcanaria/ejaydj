@@ -4,14 +4,14 @@ module Ejaydj
                   :album,
                   :artist
 
-    attr_accessor :playlist_name
+    attr_accessor :playlist
 
     def initialize(attributes={})
       @id            = attributes[:id]
       @name          = attributes[:name]
       @album         = attributes[:album]
       @artist        = attributes[:artist]
-      @playlist_name = attributes[:playlist_name]
+      @playlist      = attributes[:playlist]
     end
   end
 end
