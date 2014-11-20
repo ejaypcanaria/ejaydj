@@ -2,8 +2,6 @@ require 'rest_client'
 require 'base64'
 require 'json'
 
-require 'pry'
-
 module Ejaydj
   module Spotify
     class Client
