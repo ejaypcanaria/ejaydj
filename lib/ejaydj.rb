@@ -1,5 +1,5 @@
-require "ejaydj/version"
+require 'ejaydj/dj'
+require 'ejaydj/playlist'
+require 'ejaydj/track'
 
-module Ejaydj
-  # Your code goes here...
-end
+require 'ejaydj/djs/twitter_bot'
