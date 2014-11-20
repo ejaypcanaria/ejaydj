@@ -54,7 +54,7 @@ Given a `dj` object from the above configuration, tweeting your music is as simp
 ```
 
 The tweet format will look like:
-`NP: {song} by {artist} from {playlist} playlist: {playlist_url}`
+`NP: {song} by {artist} from playlist: {playlist_url}`
 Each songs is based on the provided time (default is current time). It will automatically lookup for tracks in the scheduled playlists.
 
 ## Playlists Schedule
