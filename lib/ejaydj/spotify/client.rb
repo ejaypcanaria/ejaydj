@@ -5,13 +5,13 @@ require 'json'
 require 'pry'
 
 module Ejaydj
-	module Spotify
-		class Client
+  module Spotify
+    class Client
 
-			API_URL 					= 'https://api.spotify.com'
-			ACCOUNT_API_URL		= 'https://accounts.spotify.com'
+      API_URL 					= 'https://api.spotify.com'
+      ACCOUNT_API_URL		= 'https://accounts.spotify.com'
 
-			def initialize(config={})
+      def initialize(config={})
         @rest_client   = config[:rest_client] || RestClient
         @client_id 		 = config[:client_id]
         @client_secret = config[:client_secret]
