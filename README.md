@@ -25,7 +25,7 @@ Or install it yourself as:
 ### Set the Spotify and Twitter credentials in your new TwitterBot DJ then add your playlists
 
 ```ruby
-  dj = Ejaydj::Djs::TwitterBot.new do |config|
+dj = Ejaydj::Djs::TwitterBot.new do |config|
   config.music_user_id               = 'spotify_user_id'
   config.music_client_id             = 'spotify_client_id'
   config.music_client_secret         = 'spotify_client_secret'
@@ -53,6 +53,7 @@ Given a `dj` object from the above configuration, tweeting your music is as simp
 
 The tweet format will look like:
 `NP: {song} by {artist} from {playlist} playlist: {playlist_url}`
+Each songs is based on the provided time (default is current time). It will automatically lookup for tracks in the scheduled playlists.
 
 ## Playlists Schedule
 Playlists are group into four time spots as you have seen in the configuration earlier. These time spots are:
@@ -71,7 +72,7 @@ By default, the current time used is `Time.now`. You can override it by passing 
 
 ## Contributing
 
-1. Fork it ( https://github.com/[my-github-username]/ejaydj/fork )
+1. Fork it ( https://github.com/ejaypcanaria/ejaydj/fork )
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
