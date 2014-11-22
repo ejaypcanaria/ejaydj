@@ -10,13 +10,14 @@ module Ejaydj
       def all
         response_items = @music_client.playlist_tracks(user_id: @user_id, playlist_id: @playlist_id)
 
-        response_items.map do |track|
+        response_items.map do |item|
           Track.new(
-            id:            track["track"]["id"],
-            name:          track["track"]["name"],
-            album:         track["track"]["album"]["name"],
-            artist:        track["track"]["artists"][0]["name"],
-            duration_ms:   track["track"]["duration_ms"]
+            id:            item["track"]["id"],
+            name:          item["track"]["name"],
+            album:         item["track"]["album"]["name"],
+            artist:        item["track"]["artists"][0]["name"],
+            duration_ms:   item["track"]["duration_ms"],
+            url:           item["track"]["external_urls"]["spotify"]
           )
         end
       end

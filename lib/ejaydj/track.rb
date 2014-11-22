@@ -8,6 +8,7 @@ module Ejaydj
                   :album,
                   :artist,
                   :duration_ms,
+                  :url,
                   :playlist
 
     def initialize(attributes={})
