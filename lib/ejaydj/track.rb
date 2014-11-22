@@ -1,5 +1,9 @@
+require 'ejaydj/mixins'
+
 module Ejaydj
   class Track
+    include Mixins
+
     attr_accessor :name,
                   :album,
                   :artist,
@@ -7,12 +11,7 @@ module Ejaydj
                   :playlist
 
     def initialize(attributes={})
-      @id            = attributes[:id]
-      @name          = attributes[:name]
-      @album         = attributes[:album]
-      @artist        = attributes[:artist]
-      @playlist      = attributes[:playlist]
-      @duration_ms   = attributes[:duration_ms]
+      instantiate_variables_from attributes
     end
   end
 end
