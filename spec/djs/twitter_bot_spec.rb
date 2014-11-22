@@ -36,12 +36,13 @@ RSpec.describe Ejaydj::Djs::TwitterBot do
       {"track" => { "id"            => 1,
                     "name"          => "Track 1",
                     "album"         => {"name" => "Album 1"},
-                    "artists"       => [{"name" => "Artist 1"}]
+                    "artists"       => [{"name" => "Artist 1"}],
+                    "external_urls" => {"spotify" => "http://www.spotify.com"}
                    }}
     ]
   end
 
-  let(:shorten_url) { 'http://goo.gl' }
+  let(:shorten_url) { 'http://goo.gl/Abc123' }
 
   before do
     allow(music_client).to receive(:user_playlists).and_return(playlist_items)
@@ -54,7 +55,7 @@ RSpec.describe Ejaydj::Djs::TwitterBot do
       tweet = twitter_bot_dj.tweet_me_a_song(time: Time.new(2014, 11, 20, 7, 0, 0))
       song = tweet[:song]
 
-      expect(tweet[:message]).to eq("NP: #{song.name} by #{song.artist} from playlist: #{shorten_url}")
+      expect(tweet[:message]).to eq("NP: #{song.name} by #{song.artist}: #{shorten_url} | playlist: #{shorten_url}")
     end
 
     context "when tweet string is over 140" do
