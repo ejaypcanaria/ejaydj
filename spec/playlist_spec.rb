@@ -15,7 +15,8 @@ RSpec.describe Ejaydj::Playlist do
                     "name"          => "Track 1",
                     "album"         => {"name" => "Album 1"},
                     "artists"       => [{"name" => "Artist 1"}],
-                    "playlist_id"   => 1
+                    "playlist_id"   => 1,
+                    "external_urls" => {"spotify" => "http://www.spotify.com"}
                    }}
     ]
   end
@@ -58,7 +59,8 @@ RSpec.describe Ejaydj::Playlist do
                                    "name"          => "Track 2",
                                    "album"         => {"name" => "Album 2"},
                                    "artists"       => [{"name" => "Artist 2"}],
-                                   "playlist_id"   => 2
+                                   "playlist_id"   => 2,
+                                   "external_urls" => {"spotify" => "http://www.spotify.com"}
                      }}
       playlist.reload!
       expect(playlist.tracks.count).to eq(track_items.count)

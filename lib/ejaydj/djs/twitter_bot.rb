@@ -10,8 +10,8 @@ module Ejaydj
                     :twitter_access_token_secret,
                     :twitter_client
 
-      MAX_SONG_LENGTH   = 50
-      MAX_ARTIST_LENGTH = 50
+      MAX_SONG_LENGTH   = 40
+      MAX_ARTIST_LENGTH = 40
 
       def initialize(attributes={}, &block)
         super(attributes, &block)
@@ -22,14 +22,13 @@ module Ejaydj
         tweet = tweet_string
 
         twitter_client.update(tweet)
-
         {message: tweet, song: @song}
       end
 
       private
 
       def tweet_string
-        tweet_string = ("NP: #{@song.name} by #{@song.artist} from playlist: #{shorten_url(@song.playlist.url)}")
+        tweet_string = ("NP: #{@song.name} by #{@song.artist}: #{shorten_url(@song.url)} | playlist: #{shorten_url(@song.playlist.url)}")
         shorten_tweet(tweet_string)
       end
 
@@ -39,7 +38,7 @@ module Ejaydj
         @song.name    = "#{@song.name[0..MAX_SONG_LENGTH]}..." if @song.name.length > MAX_SONG_LENGTH
         @song.artist  = "#{@song.artist[0..MAX_ARTIST_LENGTH]}..." if @song.artist.length > MAX_ARTIST_LENGTH
 
-        "NP: #{@song.name} by #{@song.artist} | #{shorten_url(@song.playlist.url)}"
+        "NP: #{@song.name} by #{@song.artist}: #{shorten_url(@song.url)} | #{shorten_url(@song.playlist.url)}"
       end
 
       def shorten_url(url)

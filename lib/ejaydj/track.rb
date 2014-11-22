@@ -4,6 +4,7 @@ module Ejaydj
                   :album,
                   :artist,
                   :duration_ms,
+                  :url,
                   :playlist
 
     def initialize(attributes={})
@@ -13,6 +14,7 @@ module Ejaydj
       @artist        = attributes[:artist]
       @playlist      = attributes[:playlist]
       @duration_ms   = attributes[:duration_ms]
+      @url           = attributes[:url]
     end
   end
 end
