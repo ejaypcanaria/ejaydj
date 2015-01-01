@@ -1,21 +1,18 @@
 require 'ejaydj/services/track_service'
+require 'ejaydj/mixins'
 
 module Ejaydj
   class Playlist
-    attr_reader :id,
-                :user_id,
-                :name,
-                :url,
-                :number_of_tracks
+    include Mixins
+
+    attr_accessor :id,
+                  :user_id,
+                  :name,
+                  :url,
+                  :number_of_tracks
 
     def initialize(attributes={})
-      @id               = attributes[:id]
-      @user_id          = attributes[:user_id]
-      @name             = attributes[:name]
-      @url              = attributes[:url]
-      @number_of_tracks = attributes[:number_of_tracks]
-
-      @music_client     = attributes[:music_client]
+      instantiate_variables_from attributes
     end
 
     def next_track

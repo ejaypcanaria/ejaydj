@@ -1,8 +1,11 @@
 require 'ejaydj/services/playlist_service'
 require 'ejaydj/spotify/client'
+require 'ejaydj/mixins'
 
 module Ejaydj
   class Dj
+    include Mixins
+
     PLAYLIST_SCHEDULE = {
       600..1159   => :morning_playlists,      # 6AM  - 12PM
       1200..1759  => :noon_playlists,         # 12PM - 5:59PM
@@ -20,7 +23,6 @@ module Ejaydj
                   :night_playlists,
                   :late_night_playlists
 
-
     def initialize(attributes={})
       instantiate_variables_from attributes
       yield self if block_given?
@@ -36,23 +38,20 @@ module Ejaydj
 
     def reload!
       @playlists = all_playlists
-      @playlists.each {|playlist| playlist.reload!}
+      @playlists.each(&:reload!)
     end
 
     private
 
     def current_playlist(time)
       playlist_name = scheduled_playlist(time.strftime('%k%M').to_i)
-      playlist = playlists.select do |playlist|
+      playlist = playlists.find do |playlist|
         playlist.name == playlist_name
-      end.first
+      end
     end
 
     def scheduled_playlist(time)
-      scheduled_playlists = PLAYLIST_SCHEDULE.select do |schedule, value|
-        schedule.cover? time
-      end.values.first
-
+      scheduled_playlists = PLAYLIST_SCHEDULE.select {|sched| sched.cover? time}.values[0]
       send(scheduled_playlists).sample
     end
 
@@ -70,10 +69,6 @@ module Ejaydj
       @music_client ||= Spotify::Client.new(
                           client_id: music_client_id,
                           client_secret: music_client_secret)
-    end
-
-    def instantiate_variables_from(attributes)
-      attributes.each {|key, val| instance_variable_set(:"@#{key}", val) }
     end
   end
 end

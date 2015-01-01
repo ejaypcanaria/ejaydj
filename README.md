@@ -21,8 +21,8 @@ Or install it yourself as:
 ## Configuration
 
 ### Prerequisites
-1. [Twitter consumer and access token](https://developer.spotify.com/my-applications/#!/)
-2. [Spotify client id and secret](https://apps.twitter.com/)
+1. [Spotify client id and secret](https://apps.twitter.com/)
+2. [Twitter consumer and access token](https://developer.spotify.com/my-applications/#!/)
 
 ### Set the Spotify and Twitter credentials in your new TwitterBot DJ then add your playlists
 
