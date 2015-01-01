@@ -1,5 +1,7 @@
 # Ejaydj
 
+
+[![Version](https://img.shields.io/gem/v/ejaydj.svg?style=flat)](https://rubygems.org/gems/ejaydj)
 [![Build Status](https://travis-ci.org/ejaypcanaria/ejaydj.svg)](https://travis-ci.org/ejaypcanaria/ejaydj)
 
 A bot that tweets songs from your music playlists on Spotify. Implemented using Twitter and Spotify API, let your music be heard! This is where music really never stops.
